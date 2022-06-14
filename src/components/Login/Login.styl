@@ -1,0 +1,44 @@
+.login
+  {container}
+  grid 'repeat(2, min-content) 1fr repeat(2, min-content)' 'repeat(2, 1fr)' '15px'
+  grid-template-areas 'logo logo'\
+                      'title title'\
+                      'content content'\
+                      'login forgot-password'\
+                      'register register'
+
+  +landscape()
+    max-width min-width
+
+.logo
+  grid-area logo
+  text-align center
+  margin-bottom 15px
+
+.title
+  grid-area title
+  font-size font-size-l
+  font-weight 700
+  color #FFFFFF
+  text-align center
+  margin-bottom 10px
+
+.content
+  grid-area content
+  align-self start
+  margin-bottom 15px
+
+.field
+  & + .field
+    margin-top 15px
+
+.loginButton
+  grid-area login
+
+.forgotPassword
+  grid-area forgot-password
+  text-align center
+  align-self center
+
+.register
+  grid-area register

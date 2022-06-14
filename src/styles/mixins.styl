@@ -1,6 +1,32 @@
 default-font = @block {
-  font-family 'Rubik', sans-serif
-  font-weight 300
+  font-family 'Craftwork Grotesk', sans-serif
+  font-weight 400
   font-size font-size-default
   color color-font
 }
+
+container = @block {
+  width 100%
+  min-width min-width
+  min-height calc(100vh - 25px)
+  padding 10px 0 15px
+}
+
+grid(rows, columns, gap = false)
+  display grid
+
+  if rows && columns
+    grid-template unquote(rows) + '/' + unquote(columns)
+
+  if !rows
+    grid-template-columns unquote(columns)
+
+  if !columns
+    grid-template-rows unquote(rows)
+
+  if gap
+    gap unquote(gap)
+
+landscape()
+  @media only screen and (orientation: landscape)
+    {block}

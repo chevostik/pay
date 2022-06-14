@@ -575,6 +575,7 @@ module.exports = function (webpackEnv) {
                     stylusOptions: {
                       import: [
                         'nib',
+                        path.join(__dirname, '../src/styles/fonts'),
                         path.join(__dirname, '../src/styles/vars'),
                         path.join(__dirname, '../src/styles/mixins'),
                         path.join(__dirname, '../src/styles/main')

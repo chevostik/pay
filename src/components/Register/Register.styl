@@ -1,0 +1,19 @@
+.register
+  {container}
+  grid 'min-content 1fr min-content' '1fr' '15px'
+  align-items center
+
+  +landscape()
+    grid 'repeat(3, min-content)' '1fr' '15px'
+    align-content center
+    max-width min-width
+
+.field
+  & + .field
+    margin-top 15px
+
+.childFields
+  grid '1fr' '1fr 80px min-content' '15px'
+
+  & + .childFields
+    margin-top 15px

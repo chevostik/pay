@@ -1,0 +1,55 @@
+.subscription
+  grid 'min-content 1fr min-content' '1fr' '10px'
+  height 100%
+  box-shadow 0 0 12px rgba(0, 0, 0, 0.32), inset 0px 0px 4px rgba(0, 0, 0, 0.28)
+  border-radius 40px
+  box-sizing border-box
+  padding 20px
+
+  +landscape()
+    grid 'min-content 1fr' 'repeat(2, 1fr)' '15px'
+
+.demoSubscription
+  background-color rgba(252, 129, 50, 0.8)
+  border 2px solid rgba(255, 190, 131, 0.35)
+
+.activeSubscription
+  background-color rgba(52, 115, 187, 0.8)
+  border 2px solid rgba(131, 195, 255, 0.35)
+
+.notActiveSubscription
+  background-color rgba(255, 91, 91, 0.8)
+  border 2px solid rgba(255, 190, 131, 0.35)
+
+.title
+  font-size font-size-m
+  font-weight 900
+  min-height 60px
+  margin-bottom 20px
+
+  +landscape()
+    align-self center
+    min-height 0
+
+.description
+  font-size 18px
+
+  +landscape()
+    grid-row 2/-1
+    align-self end
+
+.prolongation
+  margin-bottom 25px
+
+  +landscape()
+    display flex
+    justify-content end
+    align-self center
+
+.button
+  +landscape()
+    align-self end
+
+.row
+  & + .row
+    margin-top 25px

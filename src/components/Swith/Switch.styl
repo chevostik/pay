@@ -1,0 +1,35 @@
+.switch
+  position relative
+  display flex
+  align-items center
+  border-radius 90px
+  height 50px
+  box-sizing border-box
+  border 5px solid #FFFFFF
+
+  +landscape()
+    max-width 315px
+
+  & > input
+    position fixed
+    left -99999
+    visibility hidden
+
+    &:checked + .check
+      left 50%
+
+.label
+  flex 1 1 50%
+  font-size font-size-s
+  font-weight 700
+  text-align center
+
+.check
+  position absolute
+  width 50%
+  height 100%
+  top 0
+  left 0
+  background-color rgba(255, 255, 255, 0.4)
+  border-radius 90px
+  transition all 0.3s ease

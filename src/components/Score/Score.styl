@@ -1,0 +1,32 @@
+.score
+  grid 'min-content 1fr min-content' '1fr' '10px'
+
+  +landscape()
+    grid 'min-content 1fr' '1fr 1fr' '10px'
+
+.title
+  grid-column 1/-1
+  font-size font-size-m
+  font-weight 900
+  min-height 60px
+  margin-bottom 20px
+
+  +landscape()
+    min-height 0
+    margin-bottom 0
+
+.balance
+  display flex
+  align-items center
+  column-gap 10px
+  font-size font-size-l
+  font-weight 900
+  text-shadow 0 0 14px rgba(0, 0, 0, 0.45)
+  align-self start
+
+  +landscape()
+    align-self center
+
+.button
+  +landscape()
+    align-self center
