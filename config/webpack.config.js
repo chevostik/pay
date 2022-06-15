@@ -563,7 +563,7 @@ module.exports = function (webpackEnv) {
                     postcssOptions: {
                       plugins: [
                         'postcss-normalize',
-                        'autoprefixer'
+                        'autoprefixer',
                       ]
                     },
                     sourceMap: true,

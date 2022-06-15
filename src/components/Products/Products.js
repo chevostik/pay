@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import cn from 'classnames';
 import * as api from '../../api/api';
 import Title from '../Title/Title';
 import Button from '../Button/Button';
@@ -56,7 +57,7 @@ function Products(props) {
         </Link>
       )} />
       <div className={style.scroll}>
-        <div className={style.inner}>
+        <div className={cn(style.inner, {[style.isOne]: (products.length === 1), [style.isTwo]: (products.length === 2)})}>
           {
             products.map((product) => (
               <div key={product.id} className={style.product}>

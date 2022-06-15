@@ -1,11 +1,17 @@
 .products
   {container}
+  flex 1 1 100%
   grid 'min-content 1fr' '1fr' '15px'
 
 .scroll
   overflow-x auto
   width 100vw
-  margin-left calc((100% - 100vw) / 2)
+  scrollbar-width none
+  margin-left -20px
+  margin-right -20px
+
+  &::-webkit-scrollbar
+    display none
 
 .inner
   display flex
@@ -13,7 +19,23 @@
   box-sizing border-box
   padding-left 20px
 
+  &.isOne
+    padding-left 20px
+
+    .product
+      flex-basis 100%
+
+  +landscape()
+    &.isTwo
+      padding-left 20px
+
+      .product
+        flex-basis 50%
+
 .product
   flex 0 0 90%
   box-sizing border-box
   padding-right 20px
+
+  +landscape()
+    flex 0 0 45%

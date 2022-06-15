@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as api from '../../api/api';
+import { isEmail } from '../../helpers';
 import Field from '../Field/Field';
 import Title from '../Title/Title';
 import Button from '../Button/Button';
@@ -16,14 +17,26 @@ function ForgotPassword() {
   const navigate = useNavigate();
 
   async function forgotPasswordHandle() {
-    if (email.length === 0) {
-      setErrorMessage('Не указана почта');
-      return false;
+    if (!isEmail(email)) {
+      setErrorMessage('Не корректная почта');
+      setEmail('');
     }
 
-    await api.passwordReset(email);
-    setIsResetLinkSend(true);
-    setTimeout(() => navigate('/'), 3000);
+    if (email.length === 0) {
+      setErrorMessage('Не указана почта');
+    }
+
+    if (email.length > 0 && isEmail(email)) {
+      const response = await api.passwordReset(email);
+
+      if (response) {
+        setIsResetLinkSend(true);
+        setTimeout(() => navigate('/'), 3000);
+      } else {
+        setErrorMessage('Почта не найдена');
+        setEmail('');
+      }
+    }
   }
 
   if (isResetLinkSend) {
@@ -46,7 +59,8 @@ function ForgotPassword() {
       )} />
       <div className="field">
         <Field type="email"
-               placeholder='Почта для восстановления пароля'
+               placeholder="Почта для восстановления пароля"
+               value={email}
                onChange={(value) => setEmail(value)}
                errorMessage={errorMessage} />
       </div>

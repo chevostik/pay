@@ -11,7 +11,9 @@ function Youkassa({ token, parentId, endLoad, backUrl }) {
       customization: {
         colors: {
           controlPrimary: '#f77600',
-          background: '#DDF6F8'
+          background: '#FFFEF0',
+          border: '#FFFEF0',
+          text: '#0F1839'
         }
       }
     });

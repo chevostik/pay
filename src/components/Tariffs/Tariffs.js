@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import * as api from '../../api/api';
 import Title from '../Title/Title';
 import Button from '../Button/Button';
@@ -12,6 +13,7 @@ function Tariffs(props) {
   const [tariffs, setTariffs] = useState([]);
   const [isShowPayment, setIsShowPayment] = useState(false);
   const [paymentData, setPaymentData] = useState({});
+  const [promoCodeError, setPromoCodeError] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -31,19 +33,25 @@ function Tariffs(props) {
     const utm = window.sessionStorage.getItem('utmString') || '';
     let promo_code = null;
 
-    if (tariff.promocode && tariff.promocode.word) {
-      promo_code = { promo_code: tariff.promocode.word.toLowerCase() };
+    if (tariff.promoCode) {
+      promo_code = { promo_code: tariff.promoCode.toLowerCase() };
     }
 
-    let paymentData = await api.getTokenForPaymentSubscription({
-      tariff_id: tariff.id,
-      is_recurrent: tariff.isProlongation ? '1' : '0',
-      utm,
-      ...(promo_code ? promo_code : {})
-    }, navigate);
+    try {
+      let paymentData = await api.getTokenForPaymentSubscription({
+        tariff_id: tariff.id,
+        is_recurrent: tariff.isProlongation ? '1' : '0',
+        utm,
+        ...(promo_code ? promo_code : {})
+      }, navigate);
 
-    setIsShowPayment(true);
-    setPaymentData({ ...paymentData, backUrl: 'https://chevostik.ru/successful-payment/' });
+      setIsShowPayment(true);
+      setPaymentData({ ...paymentData, backUrl: 'https://chevostik.ru/successful-payment/' });
+    } catch(err) {
+      // TODO: Сделать чтобы поле с промокодом сбрасывалось
+      setPromoCodeError(err.message);
+    }
+
     await props.onLoadingData(false);
   }
 
@@ -61,11 +69,11 @@ function Tariffs(props) {
         </Link>
       )} />
       <div className={style.scroll}>
-        <div className={style.inner}>
+        <div className={cn(style.inner, {[style.isOne]: (tariffs.length === 1)})}>
           {
             tariffs.map((tariff) => (
               <div key={tariff.id} className={style.tariff}>
-                <Tariff tariff={tariff} onPayment={handlePayment} />
+                <Tariff tariff={tariff} onPayment={handlePayment} promoCodeError={promoCodeError} />
               </div>
             ))
           }

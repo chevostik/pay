@@ -44,8 +44,14 @@ export async function registerUser(user, navigate) {
  * @returns {Promise<Object>}
  */
 export async function passwordReset(email) {
-  const response = ajax.post('/auth/password', { email })
-  return response.data;
+  try {
+    await ajax.post('/auth/password', { email })
+    return true;
+  } catch (err) {
+    if (err.response.status === 404) {
+      return false;
+    }
+  }
 }
 
 /**
@@ -84,6 +90,10 @@ export async function getTariffs() {
  */
 export async function getTokenForPaymentSubscription(body, navigate) {
   const response = await ajax.post('/payments', body);
+
+  if (response.data.errors) {
+    throw new Error(response.data.errors);
+  }
 
   if (response.data.hasOwnProperty('url')) {
     return navigate(response.data.url);

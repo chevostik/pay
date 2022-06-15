@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from '../../config';
 import { logout } from '../../helpers';
 import * as api from '../../api/api';
 import Title from '../Title/Title';
@@ -19,9 +20,13 @@ function Cabinet(props) {
     async function fetchData() {
       await props.onLoadingData(true);
       const user = await api.getCurrentUserProfile();
-      const tariff = await api.getTariff(user.subscription.tariff.id);
+
+      if (user.subscription.tariff.id !== config.demoTariffId) {
+        const tariff = await api.getTariff(user.subscription.tariff.id);
+        setTariff(tariff);
+      }
+
       setUser(user);
-      setTariff(tariff);
       await props.onLoadingData(false);
     }
 

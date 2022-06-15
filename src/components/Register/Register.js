@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { getTimeZone } from '../../helpers';
+import { getTimeZone, isEmail } from '../../helpers';
 import * as api from '../../api/api';
 import Title from '../Title/Title';
 import Field from '../Field/Field';
@@ -22,8 +22,19 @@ function Register() {
 
   // Обработка данных первого шага
   function stepOneHandle() {
+    if (!isEmail(email)) {
+      setErrorMessages((prevState) => ({...prevState, email: 'Не корректная почта'}));
+      setEmail('');
+    }
+
     if (email.length === 0) {
       setErrorMessages((prevState) => ({...prevState, email: 'Не указана почта'}));
+    }
+
+    if (password.length < 6) {
+      setErrorMessages((prevState) => ({...prevState, password: 'Пароль не может быть меньше 6 символов'}));
+      setPassword('');
+      setPasswordConfirm('');
     }
 
     if (password.length === 0) {
@@ -35,7 +46,7 @@ function Register() {
       setPasswordConfirm('');
     }
 
-    if (email.length > 0 && password.length > 0 && password === passwordConfirm) {
+    if (email.length > 0 && isEmail(email) && password.length >= 6 && password === passwordConfirm) {
       setStep('stepTwo');
     }
   }
@@ -48,10 +59,17 @@ function Register() {
 
   async function stepTwoHandle() {
     const childrenErrors = [];
+    const childrenCopy = [...children];
 
-    children.forEach((child) => {
+    children.forEach((child, index) => {
       const name = (!child.name || child.name.length === 0) ? 'Укажите имя ребенка' : '';
-      const birthday = (!child.birthday || child.birthday.length === 0) ? 'дд.мм.гг' : '';
+
+      let birthday = '';
+
+      if (!/^\d{2}\.\d{2}\.\d{2}$/.test(child.birthday)) {
+        birthday = 'дд.мм.гг';
+        childrenCopy[index].birthday = '';
+      }
 
       if (name.length > 0 || birthday.length > 0) {
         childrenErrors[child.id] = {name, birthday};
@@ -59,13 +77,18 @@ function Register() {
     });
 
     setErrorMessages((prevState) => ({...prevState, childrenErrors}));
+    setChildren(childrenCopy);
 
     if (childrenErrors.length === 0) {
       const user = {
         email,
         password,
         password_confirmation: passwordConfirm,
-        children_attributes: children,
+        children_attributes: children.map((child) => {
+          const value = new Date(child.birthday);
+          const birthday = `${value.getFullYear()}-${value.getMonth() + 1}-${value.getDate()}`;
+          return { ...child, birthday };
+        }),
         time_zone: getTimeZone(new Date())
       };
 
@@ -108,6 +131,7 @@ function Register() {
     setChildKey(childKey + 1);
   }, [children]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Переход на следующий шаг
   function nextStepButtonHandle() {
     if (step === 'stepOne') {
       stepOneHandle();
@@ -125,26 +149,28 @@ function Register() {
     );
   }
 
-  let content = '';
+  let content = null;
 
   if (step === 'stepOne') {
     content = (
       <>
         <div className={style.field}>
           <Field type="email"
-                 placeholder='Email'
+                 placeholder="Email"
+                 value={email}
                  onChange={(value) => setEmail(value)}
                  errorMessage={errorMessages.email}/>
         </div>
         <div className={style.field}>
           <Field type="password"
-                 placeholder='Пароль'
+                 placeholder="Пароль"
+                 value={password}
                  onChange={(value) => setPassword(value)}
                  errorMessage={errorMessages.password}/>
         </div>
         <div className={style.field}>
           <Field type="password"
-                 placeholder='Повторите пароль'
+                 placeholder="Повторите пароль"
                  value={passwordConfirm}
                  onChange={(value) => setPasswordConfirm(value)}
                  errorMessage={errorMessages.passwordConfirm}/>
@@ -169,10 +195,12 @@ function Register() {
 
       return (
         <div key={child.id} className={cn(style.childFields)}>
-          <Field placeholder='Имя вашего ребёнка'
+          <Field value={child.name}
+                 placeholder="Имя вашего ребёнка"
                  onChange={(value) => editChild(index,'name', value)}
                  errorMessage={nameErrorMessage} />
-          <Field placeholder='дд.мм.гг'
+          <Field value={child.birthday}
+                 placeholder="дд.мм.гг"
                  textAlign="center"
                  isWide={true}
                  onChange={(value) => editChild(index,'birthday', value)}

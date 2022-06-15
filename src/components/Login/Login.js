@@ -59,14 +59,14 @@ function Login() {
         <div className={style.field}>
           <Field type="email"
                  value={email}
-                 placeholder='Email'
+                 placeholder="Email"
                  onChange={(value) => setEmail(value)}
                  errorMessage={errorMessages.email} />
         </div>
         <div className={style.field}>
           <Field type="password"
                  value={password}
-                 placeholder='Пароль'
+                 placeholder="Пароль"
                  onChange={(value) => setPassword(value)}
                  errorMessage={errorMessages.password} />
         </div>

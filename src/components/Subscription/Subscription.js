@@ -9,6 +9,7 @@ function Subscription({ subscription, tariff }) {
   let title = 'Текущая подписка';
   let buttonText = 'Продлить подписку';
   let theme = 'activeSubscription';
+  let tariffTitle = tariff.title;
 
   if (subscription?.status === 'off') { // Если подписка закончилась
     title = 'Подписка закончилась!';
@@ -17,6 +18,7 @@ function Subscription({ subscription, tariff }) {
   } else if (subscription?.tariff?.id === config.demoTariffId) { // Если подписка демо
     title = 'Пробная подписка';
     theme = 'demoSubscription';
+    tariffTitle = 'Демо';
   }
 
   const date = new Date(subscription?.due_date);
@@ -28,7 +30,7 @@ function Subscription({ subscription, tariff }) {
     <div className={cn(style.subscription, style[theme])}>
       <div className={style.title}>{title}</div>
       <div className={style.description}>
-        <div className={style.row}>Тариф: <strong>{tariff.title}</strong></div>
+        <div className={style.row}>Тариф: <strong>{tariffTitle}</strong></div>
         <div className={style.row}>Активна до {day}.{month}.{year}</div>
       </div>
       <div className={style.prolongation}>

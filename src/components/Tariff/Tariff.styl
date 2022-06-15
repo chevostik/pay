@@ -7,6 +7,9 @@
   box-sizing border-box
   padding 20px
 
+  +landscape()
+    grid 'repeat(2, min-content) 1fr repeat(2, min-content)' '0.8fr 1.2fr' '15px'
+
 .superTariff
   background-image url('./super.svg')
   background-position center
@@ -17,15 +20,31 @@
   font-weight 700
   margin-bottom -15px
 
+  +landscape()
+    grid-column 1/-1
+
 .month
   font-size font-size-m
   font-weight 700
+
+  +landscape()
+    grid-column 1/-1
 
 .description
   font-size font-size-s
   font-weight 700
   align-self end
 
+  +landscape()
+    grid-column 1/-1
+
+.prolongation
+  +landscape()
+    grid-row 4/5
+
 .price
   font-size 28px
   font-weight 700
+
+  +landscape()
+    grid-row 5/-1
