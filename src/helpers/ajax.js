@@ -2,9 +2,9 @@ import axios from 'axios';
 import config from '../config';
 import * as auth from './auth';
 
-const BaseURL = {
-  v1: `${config.baseUrl}/api/v1`,
-  v2: `${config.baseUrl}/api/v2`
+const apiURL = {
+  v1: `${config.apiHost}/api/v1`,
+  v2: `${config.apiHost}/api/v2`
 };
 
 function ajaxConfig(version) {
@@ -36,7 +36,7 @@ function ajaxConfig(version) {
         config.headers.Authorization = `Bearer ${auth.getToken()}`;
       }
 
-      url = BaseURL[version] + url;
+      url = apiURL[version] + url;
       config.url = url;
       return config;
     },

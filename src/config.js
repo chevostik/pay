@@ -1,5 +1,6 @@
 const config = {
-  baseUrl: '',
+  host: 'https://pay.chevostik.ru',
+  apiHost: 'https://stage.chevostik.ru',
   demoTariffId: 52,
   superTariffId: 48
 };
