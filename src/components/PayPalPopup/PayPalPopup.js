@@ -13,7 +13,7 @@ function PayPalPopup(props) {
             <img src={closeIcon} alt="" />
           </Button>
         </div>
-        <p className={style.pay}>Оплата на <a href="mailto:dmitriy.tomisonets@gmail.com" target="_blank">dmitriy.tomisonets@gmail.com</a></p>
+        <p className={style.pay}>Оплата на <a href="https://www.paypal.com" target="_blank">dmitriy.tomisonets@gmail.com</a></p>
         <p>После оплаты пришлите скриншот и почту для оформления подписки по адресу <a href="mailto:hello@chevostik.ru">hello@chevostik.ru</a></p>
         <p className={style.activate}>Активация в течении 1-2 часов</p>
         <img className={style.icon} src={payPalIcon} srcSet={`${payPalRetinaIcon} 2x`} alt="" />
