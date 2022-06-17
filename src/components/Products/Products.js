@@ -39,7 +39,7 @@ function Products(props) {
     }, navigate);
 
     setIsShowPayment(true);
-    setPaymentData({ ...paymentData, backUrl: 'https://chevostik.ru/successful-payment/' });
+    setPaymentData({ ...paymentData, backUrl: 'https://pay.chevostik.ru/successful-payment/' });
     await props.onLoadingData(false);
   }
 

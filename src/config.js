@@ -1,6 +1,6 @@
 const config = {
-  host: 'https://pay.chevostik.ru',
-  apiHost: 'https://stage.chevostik.ru',
+  host: window.location.host.includes('chevostik.ru') ? 'https://pay.chevostik.ru' : '',
+  apiHost: window.location.host.includes('chevostik.ru') ? 'https://stage.chevostik.ru' : '',
   demoTariffId: 52,
   superTariffId: 48
 };

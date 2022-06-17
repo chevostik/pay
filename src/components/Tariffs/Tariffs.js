@@ -46,7 +46,7 @@ function Tariffs(props) {
       }, navigate);
 
       setIsShowPayment(true);
-      setPaymentData({ ...paymentData, backUrl: 'https://chevostik.ru/successful-payment/' });
+      setPaymentData({ ...paymentData, backUrl: 'https://pay.chevostik.ru/successful-payment/' });
     } catch(err) {
       // TODO: Сделать чтобы поле с промокодом сбрасывалось
       setPromoCodeError(err.message);
