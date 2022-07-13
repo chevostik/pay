@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as api from '../../api/api';
 import { Link } from 'react-router-dom';
-import Field from '../Field/Field';
-import Button from '../Button/Button';
-import Logo from '../Logo/Logo';
-import Message from '../Message/Message';
+import Field from '../../components/Field/Field';
+import Button from '../../components/Button/Button';
+import Logo from '../../components/Logo/Logo';
+import Message from '../../components/Message/Message';
 import style from './Login.styl';
 
 function Login() {

@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as api from '../../api/api';
 import { isEmail } from '../../helpers';
-import Field from '../Field/Field';
-import Title from '../Title/Title';
-import Button from '../Button/Button';
-import Message from '../Message/Message';
+import Field from '../../components/Field/Field';
+import Title from '../../components/Title/Title';
+import Button from '../../components/Button/Button';
+import Message from '../../components/Message/Message';
 import style from './ForgotPassword.styl';
-import closeIcon from '../Title/close.svg';
+import closeIcon from '../../components/Title/close.svg';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');

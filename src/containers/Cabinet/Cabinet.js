@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import config from '../../config';
 import { logout } from '../../helpers';
 import * as api from '../../api/api';
-import Title from '../Title/Title';
-import Switch from '../Swith/Switch';
-import Subscription from '../Subscription/Subscription';
-import Score from '../Score/Score';
-import Button from '../Button/Button';
+import Title from '../../components/Title/Title';
+import Switch from '../../components/Swith/Switch';
+import Subscription from '../../components/Subscription/Subscription';
+import Score from '../../components/Score/Score';
+import Button from '../../components/Button/Button';
 import style from './Cabinet.styl';
-import logoutIcon from '../Title/logout.svg';
+import logoutIcon from '../../components/Title/logout.svg';
 
 function Cabinet(props) {
   const [user, setUser] = useState({});

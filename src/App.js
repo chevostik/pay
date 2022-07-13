@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Cabinet from './components/Cabinet/Cabinet';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import Cabinet from './containers/Cabinet/Cabinet';
+import Login from './containers/Login/Login';
+import Register from './containers/Register/Register';
+import ForgotPassword from './containers/ForgotPassword/ForgotPassword';
 import ErrorPage from './components/ErrorPage/ErrorPage';
-import Tariffs from './components/Tariffs/Tariffs';
-import Products from './components/Products/Products';
+import Tariffs from './containers/Tariffs/Tariffs';
+import Products from './containers/Products/Products';
 import SuccessfulPayment from './components/SuccessfulPayment/SuccessfulPayment';
 import Loading from './components/Loading/Loading';
 import GuestRoute from './components/GuestRoute/GuestRoute';

@@ -3,12 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import { getTimeZone, isEmail } from '../../helpers';
 import * as api from '../../api/api';
-import Title from '../Title/Title';
-import Field from '../Field/Field';
-import Button from '../Button/Button';
-import Message from '../Message/Message';
+import Title from '../../components/Title/Title';
+import Field from '../../components/Field/Field';
+import Button from '../../components/Button/Button';
+import Message from '../../components/Message/Message';
 import style from './Register.styl';
-import closeIcon from '../Title/close.svg';
+import closeIcon from '../../components/Title/close.svg';
 import plusIcon from './plus.svg';
 import minusIcon from './minus.svg';
 

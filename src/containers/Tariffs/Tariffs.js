@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import * as api from '../../api/api';
-import Title from '../Title/Title';
-import Button from '../Button/Button';
-import Tariff from '../Tariff/Tariff';
-import Payment from '../Payment/Payment';
+import Title from '../../components/Title/Title';
+import Button from '../../components/Button/Button';
+import Tariff from '../../components/Tariff/Tariff';
+import Payment from '../../components/Payment/Payment';
 import style from './Tariffs.styl'
-import closeIcon from '../Title/close.svg';
+import closeIcon from '../../components/Title/close.svg';
 
 function Tariffs(props) {
   const [tariffs, setTariffs] = useState([]);
