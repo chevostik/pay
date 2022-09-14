@@ -19,7 +19,8 @@ function Tariffs(props) {
     async function fetchData() {
       await props.onLoadingData(true);
       const tariffs = await api.getTariffs();
-      setTariffs(tariffs);
+      const filteredTariffs = tariffs.filter(item => item.apple_pay_id.length === 0)
+      setTariffs(filteredTariffs);
       await props.onLoadingData(false);
     }
 
