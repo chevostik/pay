@@ -6,10 +6,11 @@ import Checkbox from '../Checkbox/Checkbox';
 import style from './Subscription.styl';
 
 function Subscription({ subscription, tariff }) {
+  console.log(subscription)
   let title = 'Текущая подписка';
   let buttonText = 'Продлить подписку';
   let theme = 'activeSubscription';
-  let tariffTitle = tariff.title;
+  let tariffTitle = tariff.name;
 
   if (subscription?.status === 'off') { // Если подписка закончилась
     title = 'Подписка закончилась!';

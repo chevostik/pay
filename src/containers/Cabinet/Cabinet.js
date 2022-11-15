@@ -22,8 +22,14 @@ function Cabinet(props) {
       const user = await api.getCurrentUserProfile();
 
       if (user.subscription.tariff.id !== config.demoTariffId) {
-        const tariff = await api.getTariff(user.subscription.tariff.id);
-        setTariff(tariff);
+        const payments = await api.getPayments();
+        let filteredPayment = payments.filter(item => {
+          return item.tariff?.id === user.subscription.tariff.id
+            && item.status === 'completed';
+        });
+
+        filteredPayment = filteredPayment[0]?.tariff || { name: 'Промо' }
+        setTariff(filteredPayment);
       }
 
       setUser(user);

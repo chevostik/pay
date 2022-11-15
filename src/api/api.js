@@ -127,3 +127,12 @@ export async function getProducts(category = '') {
   const response = await ajaxV2.get(`/products/${category ? '?category=' + category : ''}`);
   return response.data.sort((a, b) => a.price - b.price);
 }
+
+/**
+ * Получаем список платежей
+ * @returns {Promise<any>}
+ */
+export async function getPayments() {
+  const response = await ajax.get('/payments');
+  return response.data
+}
