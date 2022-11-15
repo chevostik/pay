@@ -13,7 +13,7 @@ function Tariffs(props) {
   const [tariffs, setTariffs] = useState([]);
   const [isShowPayment, setIsShowPayment] = useState(false);
   const [paymentData, setPaymentData] = useState({});
-  const [promoCodeError, setPromoCodeError] = useState('');
+  const [promoCodeError, setPromoCodeError] = useState({});
 
   useEffect(() => {
     async function fetchData() {
@@ -49,11 +49,17 @@ function Tariffs(props) {
       setIsShowPayment(true);
       setPaymentData({ ...paymentData, backUrl: 'https://pay.chevostik.ru/successful-payment/' });
     } catch(err) {
-      // TODO: Сделать чтобы поле с промокодом сбрасывалось
-      setPromoCodeError(err.message);
+      setPromoCodeError({
+        tariffId: tariff.id,
+        message: err.message
+      });
     }
 
     await props.onLoadingData(false);
+  }
+
+  function handlePromoCodeError() {
+    setPromoCodeError({});
   }
 
   if (isShowPayment) {
@@ -74,7 +80,11 @@ function Tariffs(props) {
           {
             tariffs.map((tariff) => (
               <div key={tariff.id} className={style.tariff}>
-                <Tariff tariff={tariff} onPayment={handlePayment} promoCodeError={promoCodeError} />
+                {tariff.id === promoCodeError.tariffId}
+                <Tariff tariff={tariff}
+                        onPayment={handlePayment}
+                        onPromoCodeError={handlePromoCodeError}
+                        promoCodeError={(tariff.id === promoCodeError.tariffId) ? promoCodeError.message : ''} />
               </div>
             ))
           }

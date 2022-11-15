@@ -7,12 +7,17 @@ import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import style from './Tariff.styl';
 
-function Tariff({ tariff, promoCodeError, ...props }) {
+function Tariff({ tariff, promoCodeError, onPromoCodeError, ...props }) {
   const [promoCode, setPromoCode] = useState('');
   const [isProlongation, setIsProlongation] = useState(tariff.is_recurrent);
 
   function handleClick() {
     props.onPayment({ ...tariff, promoCode, isProlongation });
+  }
+
+  function handlePromoCodeChange(value) {
+    setPromoCode(value);
+    onPromoCodeError();
   }
 
   return (
@@ -25,8 +30,8 @@ function Tariff({ tariff, promoCodeError, ...props }) {
       <div className={style.price}>{tariff.price} ₽</div>
       <Field isTransparent={true}
              placeholder="Промокод"
-             value={promoCode}
-             onChange={(value) => setPromoCode(value)}
+             value={!promoCodeError ? promoCode : ''}
+             onChange={(value) => { handlePromoCodeChange(value) }}
              errorMessage={promoCodeError} />
       <div className={style.prolongation}>
         <Checkbox label="Автопродление"
