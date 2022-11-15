@@ -7,7 +7,7 @@ import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import style from './Tariff.styl';
 
-function Tariff({ tariff, promoCodeError, onPromoCodeError, ...props }) {
+function Tariff({ tariff, promoCodeError, ...props }) {
   const [promoCode, setPromoCode] = useState('');
   const [isProlongation, setIsProlongation] = useState(tariff.is_recurrent);
 
@@ -17,7 +17,7 @@ function Tariff({ tariff, promoCodeError, onPromoCodeError, ...props }) {
 
   function handlePromoCodeChange(value) {
     setPromoCode(value);
-    onPromoCodeError();
+    props.onPromoCodeError();
   }
 
   return (
