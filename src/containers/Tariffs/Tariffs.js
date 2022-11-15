@@ -1,3 +1,7 @@
+/**
+ * TODO: После вывода ошибки о неверном промокоде не активна кнопка покупки
+ */
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
